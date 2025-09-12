@@ -1,0 +1,125 @@
+body {
+  margin: 0;
+  font-family: "Arial", sans-serif;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 60px;
+  background-color: white;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Logo */
+.logo {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.logo span {
+  font-weight: 400; /* "be" lighter */
+}
+
+/* Nav links */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+
+.nav-links li {
+  position: relative;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #333;
+  letter-spacing: 3px;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.nav-links a.active {
+  font-weight: 600;
+}
+
+.nav-links a.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 100%;
+  height: 2px;
+  background: black;
+}
+
+.nav-links a:hover {
+  color: black;
+}
+
+
+
+.hero {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+.hero-left,
+.hero-right,
+.hero-center {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-left {
+  flex: 1;   /* smaller width */
+}
+
+.hero-center {
+  flex: 2;   /* bigger width */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-right {
+  flex: 1;   /* smaller width */
+}
+
+.hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-content {
+  position: absolute;
+  color: white;
+  text-align: center;
+  max-width: 500px;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.hero-content p {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.hero-content a {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: #fff;
+  color: #000;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 4px;
+}
