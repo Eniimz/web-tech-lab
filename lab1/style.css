@@ -1,15 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+
 body {
   margin: 0;
-  font-family: "Arial", sans-serif;
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 14px;
+  line-height: 21px;
+  font-weight: 400;
+  letter-spacing: 0px;
 }
 
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 60px;
+  padding: 20px 170px;
   background-color: white;
   border-bottom: 1px solid #ddd;
+ 
 }
 
 /* Logo */
