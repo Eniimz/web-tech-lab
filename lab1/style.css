@@ -13,23 +13,21 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 170px;
+  padding: 20px 220px;
   background-color: white;
   border-bottom: 1px solid #ddd;
  
 }
 
-/* Logo */
 .logo {
   font-size: 28px;
   font-weight: 700;
 }
 
 .logo span {
-  font-weight: 400; /* "be" lighter */
+  font-weight: 400;
 }
 
-/* Nav links */
 .nav-links {
   list-style: none;
   display: flex;
@@ -83,18 +81,18 @@ body {
 }
 
 .hero-left {
-  flex: 1;   /* smaller width */
+  flex: 1;  
 }
 
 .hero-center {
-  flex: 2;   /* bigger width */
+  flex: 2;   
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .hero-right {
-  flex: 1;   /* smaller width */
+  flex: 1;  
 }
 
 .hero img {
