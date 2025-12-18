@@ -1,0 +1,121 @@
+<div class="admin-page-header">
+  <h1 class="admin-page-title"><%= product ? 'Edit Product' : 'Add New Product' %></h1>
+  <div class="admin-page-actions">
+    <a href="/admin/products" class="btn-admin btn-admin-secondary">
+      <i class="fas fa-arrow-left"></i> Back to Products
+    </a>
+  </div>
+</div>
+
+<form action="<%= formAction %>" method="<%= formMethod %>" class="admin-form">
+  <div class="form-row">
+    <div class="form-group">
+      <label for="name" class="form-label">Product Name *</label>
+      <input 
+        type="text" 
+        id="name" 
+        name="name" 
+        class="form-control" 
+        value="<%= product ? product.name : '' %>" 
+        required
+        placeholder="Enter product name"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="price" class="form-label">Price *</label>
+      <input 
+        type="number" 
+        id="price" 
+        name="price" 
+        class="form-control" 
+        value="<%= product ? product.price : '' %>" 
+        required
+        step="0.01"
+        min="0"
+        placeholder="0.00"
+      />
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group">
+      <label for="category" class="form-label">Category *</label>
+      <input 
+        type="text" 
+        id="category" 
+        name="category" 
+        class="form-control" 
+        value="<%= product ? product.category : '' %>" 
+        required
+        placeholder="e.g., Furniture, Electronics"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="department" class="form-label">Department</label>
+      <input 
+        type="text" 
+        id="department" 
+        name="department" 
+        class="form-control" 
+        value="<%= product ? product.department : '' %>" 
+        placeholder="e.g., Living Room, Bedroom"
+      />
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group">
+      <label for="color" class="form-label">Color</label>
+      <input 
+        type="text" 
+        id="color" 
+        name="color" 
+        class="form-control" 
+        value="<%= product ? product.color : '' %>" 
+        placeholder="e.g., Red, Blue, Black"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="image" class="form-label">Image URL</label>
+      <input 
+        type="url" 
+        id="image" 
+        name="image" 
+        class="form-control" 
+        value="<%= product ? product.image : '' %>" 
+        placeholder="https://example.com/image.jpg"
+      />
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="description" class="form-label">Description</label>
+    <textarea 
+      id="description" 
+      name="description" 
+      class="form-control" 
+      rows="5"
+      placeholder="Enter product description"
+    ><%= product ? product.description : '' %></textarea>
+  </div>
+
+  <div style="margin-top: 30px; display: flex; gap: 10px;">
+    <button type="submit" class="btn-admin btn-admin-primary">
+      <i class="fas fa-save"></i> <%= product ? 'Update Product' : 'Create Product' %>
+    </button>
+    <a href="/admin/products" class="btn-admin btn-admin-secondary">
+      <i class="fas fa-times"></i> Cancel
+    </a>
+  </div>
+</form>
+
+<% if (product && product.image) { %>
+  <div style="margin-top: 30px; padding: 20px; background: #f8f9fa; border-radius: 6px;">
+    <h3 style="margin-bottom: 15px; font-size: 18px;">Current Image Preview</h3>
+    <img src="<%= product.image %>" alt="<%= product.name %>" style="max-width: 300px; border-radius: 6px; border: 1px solid #ddd;" />
+  </div>
+<% } %>
+

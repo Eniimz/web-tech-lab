@@ -1,18 +1,11 @@
-# Ignore everything by default
-*
 
-# But track these specific directories
-!assignment1/
-!assignment2/
-!assignment3/
-!labTasks/
-!mid-lab-exam/
-!.gitignore
-!.git/
 
 # Ignore node_modules everywhere
 **/node_modules/
 **/node_modules/**
+
+archive/
+lab6/
 
 # Ignore common build and cache files
 **/.DS_Store

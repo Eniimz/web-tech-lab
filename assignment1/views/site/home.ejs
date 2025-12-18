@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BeDecor - Home Decor</title>
+  <link rel="stylesheet" href="/stylesheets/main-style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;300;400;600;700&family=Lato:wght@300;400;700&family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+  <!-- Header with Navigation -->
+  <header class="main-header">
+    <div class="header-overlay">
+      <div class="header-content">
+        <div class="logo">
+          <a href="/">
+            <img src="/images/assets/decor-logo-251db6.svg" alt="decor" style="display: block;">
+          </a>
+        </div>
+        <nav class="main-nav">
+          <ul class="nav-list">
+            <li class="nav-item active">
+              <a href="/">HOME</a>
+            </li>
+            <li class="nav-item">
+              <a href="/products">PRODUCTS</a>
+            </li>
+            <li class="nav-item">
+              <a href="/crud">CRUD</a>
+            </li>
+            <% if(!user) { %>
+            <li class="nav-item">
+              <a href="/login">LOGIN</a>
+            </li>
+            <% } else { %>
+            <li class="nav-item">
+              <a href="/my-account">MY ACCOUNT</a>
+            </li>
+            <% if(isAdmin) { %>
+            <li class="nav-item">
+              <a href="/admin">ADMIN</a>
+            </li>
+            <% } %>
+            <li class="nav-item">
+              <a href="/logout">LOGOUT</a>
+            </li>
+            <% } %>
+            <li class="nav-item cart-icon-item">
+              <a href="/cart" class="cart-link">
+                <i class="fas fa-shopping-cart"></i>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <!-- Hero Slider -->
+    <div class="hero-slider">
+      <div class="slider-tabs">
+        <div class="tab active" data-slide="0">Quisque</div>
+        <div class="tab" data-slide="1">Gravida</div>
+        <div class="tab" data-slide="2">Congue</div>
+      </div>
+      
+      <div class="slides-container">
+        <!-- Left Image -->
+        <div class="slide-bg left hero-slide" data-index="0">
+          <img src="/images/assets/hero-bg-1-7f5fc7.png" alt="Hero Background 1">
+        </div>
+        
+        <!-- Center Image (Active) -->
+        <div class="slide-bg center active hero-slide" data-index="1">
+          <img src="/images/assets/hero-bg-3-7f5fc7.png" alt="Beach Life">
+          <div class="slide-content">
+            <h1 class="slide-title">BEACH<br>LIFE</h1>
+            <div class="slide-bar"></div>
+            <p class="slide-text">Summer, sun and endless fun at the beach</p>
+          </div>
+        </div>
+        
+        <!-- Right Image -->
+        <div class="slide-bg right hero-slide" data-index="2">
+          <img src="/images/assets/hero-bg-2-7f5fc7.png" alt="Hero Background 2">
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <script>
+    // Hero Tabs Functionality
+    const heroTabs = document.querySelectorAll('.slider-tabs .tab');
+    const heroSlides = document.querySelectorAll('.hero-slide');
+    let currentHeroSlide = 0;
+
+    function showHeroSlide(index) {
+      // Remove active from all tabs and slides
+      heroTabs.forEach(tab => tab.classList.remove('active'));
+      heroSlides.forEach(slide => slide.classList.remove('active'));
+      
+      // Add active to selected
+      heroTabs[index].classList.add('active');
+      heroSlides[index].classList.add('active');
+      
+      // Update content visibility
+      const slideContent = document.querySelector('.slide-content');
+      if (index === 1) {
+        slideContent.style.opacity = '1';
+      } else {
+        slideContent.style.opacity = '0';
+      }
+      
+      currentHeroSlide = index;
+    }
+
+    // Click event on tabs
+    heroTabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => {
+        showHeroSlide(index);
+      });
+      
+      // Optional: Hover effect
+      tab.addEventListener('mouseenter', () => {
+        showHeroSlide(index);
+      });
+    });
+
+    // Initialize
+    showHeroSlide(0);
+  </script>
+
+  <!-- Icon Boxes Section -->
+  <section class="icon-boxes">
+    <div class="icon-box light">
+      <div class="icon-box-inner">
+        <img src="/images/assets/iconbox_1-56586a.png" alt="Open spaces">
+        <h4>Open spaces</h4>
+      </div>
+    </div>
+    <div class="icon-box dark">
+      <div class="icon-box-inner">
+        <img src="/images/assets/iconbox_2-56586a.png" alt="Outdoor elements">
+        <h4>Outdoor<br>elements</h4>
+      </div>
+    </div>
+    <div class="icon-box light">
+      <div class="icon-box-inner">
+        <img src="/images/assets/iconbox_3-56586a.png" alt="Color matching">
+        <h4>Color matching</h4>
+      </div>
+    </div>
+    <div class="icon-box dark">
+      <div class="icon-box-inner">
+        <img src="/images/assets/iconbox_4-56586a.png" alt="Comfortable and stylish">
+        <h4>Comfortable and<br>stylish</h4>
+      </div>
+    </div>
+    <div class="icon-box light">
+      <div class="icon-box-inner">
+        <img src="/images/assets/iconbox_5-56586a.png" alt="Handmade furniture">
+        <h4>Handmade<br>furniture</h4>
+      </div>
+    </div>
+    <div class="icon-box dark">
+      <div class="icon-box-inner">
+        <img src="/images/assets/iconbox_6-56586a.png" alt="Natural elements">
+        <h4>Natural elements</h4>
+      </div>
+    </div>
+  </section>
+
+  <!-- Zoom Boxes Grid -->
+  <section class="zoom-boxes">
+    <div class="zoom-box-grid">
+      <div class="zoom-box">
+        <img src="/images/assets/zoombox1-119366.png" alt="Zoom Box 1">
+        <div class="zoom-overlay">
+          <div class="zoom-icon"><i class="fas fa-comments"></i></div>
+          <h3>REQUEST FOR A FREE<br>PRICING</h3>
+        </div>
+      </div>
+      <div class="zoom-box">
+        <img src="/images/assets/zoombox2-119366.png" alt="Zoom Box 2">
+        <div class="zoom-overlay">
+          <div class="zoom-icon"><i class="fas fa-book"></i></div>
+          <h3>DOWNLOAD LATEST<br>CATALOGUE</h3>
+        </div>
+      </div>
+      <div class="zoom-box">
+        <img src="/images/assets/zoombox3-119366.png" alt="Zoom Box 3">
+        <div class="zoom-overlay">
+          <div class="zoom-icon"><i class="fas fa-gift"></i></div>
+          <h3>LATEST OFFER AND<br>PROMOTIONS</h3>
+        </div>
+      </div>
+      <div class="zoom-box">
+        <img src="/images/assets/zoombox4-119366.png" alt="Zoom Box 4">
+        <div class="zoom-overlay">
+          <div class="zoom-icon"><i class="fas fa-cog"></i></div>
+          <h3>USE OUR FREE<br>CONFIGURATOR</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quote Section Slider -->
+  <section class="quote-section">
+    <div class="quote-slider">
+      <div class="quote-slide active" data-index="0">
+        <blockquote>
+          Etiam sit amet, tellus. Ut elit viverra consectetuer. Etiam varius, sem urna<br>
+          luctus et erat eu condimentum nunc. Duis non enim vehicula tortor in<br>
+          faucibus orci a velit nec magna. Integer nonummy consequat ipsum dolor<br>
+          urna, eu dui aliquam cursus dui.
+        </blockquote>
+      </div>
+      <div class="quote-slide" data-index="1">
+        <blockquote>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod<br>
+          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,<br>
+          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo<br>
+          consequat. Duis aute irure dolor in reprehenderit.
+        </blockquote>
+      </div>
+      <div class="quote-slide" data-index="2">
+        <blockquote>
+          Pellentesque habitant morbi tristique senectus et netus et malesuada fames<br>
+          ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget,<br>
+          tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.<br>
+          Aenean ultricies mi vitae est mauris placerat.
+        </blockquote>
+      </div>
+    </div>
+    
+    <!-- Navigation Dots -->
+    <div class="quote-dots">
+      <span class="dot active" data-slide="0"></span>
+      <span class="dot" data-slide="1"></span>
+      <span class="dot" data-slide="2"></span>
+    </div>
+  </section>
+
+  <script>
+    // Quote Slider with proper horizontal sliding
+    const slides = document.querySelectorAll('.quote-slide');
+    const dots = document.querySelectorAll('.quote-dots .dot');
+    let currentSlide = 0;
+
+    function showSlide(newIndex) {
+      // Remove all position classes
+      slides.forEach(slide => {
+        slide.classList.remove('show-0', 'show-1', 'show-2', 'active');
+      });
+      
+      // Add the appropriate class to position all slides
+      slides.forEach(slide => {
+        slide.classList.add(`show-${newIndex}`);
+      });
+      
+      slides[newIndex].classList.add('active');
+      
+      // Update dots
+      dots.forEach(dot => dot.classList.remove('active'));
+      dots[newIndex].classList.add('active');
+      
+      currentSlide = newIndex;
+    }
+
+    // Initialize first slide
+    showSlide(0);
+
+    // Add click event to dots
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        if (index !== currentSlide) {
+          showSlide(index);
+        }
+      });
+    });
+
+    // Auto-advance slider every 5 seconds
+    setInterval(() => {
+      const nextSlide = (currentSlide + 1) % slides.length;
+      showSlide(nextSlide);
+    }, 5000);
+  </script>
+
+  <!-- Parallax Chair Section -->
+  <section class="parallax-section chair-section">
+    <div class="parallax-overlay">
+      <div class="parallax-content">
+        <h2>Comfortable chair</h2>
+        <h5>
+          Etiam ullamcorper. Suspendisse a pellentesque dui, non felis.<br>
+          Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur<br>
+          et ligula. Ut molestie a, ultricies porta urna. Vestibulum commodo<br>
+          volutpat a, convallis ac, laoreet enim. Phasellus fermentum in, dolor.<br>
+          Pellentesque facilisis.
+        </h5>
+        <p>
+          Aliquam erat ac ipsum. Integer aliquam purus. Quisque lorem tortor<br>
+          fringilla sed, vestibulum id, eleifend justo vel bibendum sapien massa<br>
+          ac turpis faucibus orci luctus non, consectetuer lobortis quis, varius<br>
+          in, purus. Integer ultrices posuere cubilia Curae, Nulla ipsum dolor<br>
+          lacus, suscipit adipiscing.
+        </p>
+        <a href="#" class="btn-more">SEE MORE</a>
+      </div>
+    </div>
+    <div class="parallax-bg" style="background-image: url('/images/assets/parallax-chair-56586a.png');"></div>
+  </section>
+
+  <!-- Parallax Contact Section -->
+  <section class="parallax-section contact-section">
+    <div class="parallax-bg" style="background-image: url('/images/assets/parallax-contact-56586a.png');"></div>
+    <div class="parallax-overlay">
+      <div class="parallax-content">
+        <h2>Contact us</h2>
+        <h5>
+          BeDecor<br>
+          Nulla imperdiet sit amet<br>
+          Level 13, 2 Elizabeth St,<br>
+          Melbourne, Victoria 3000<br>
+          Australia
+        </h5>
+        <a href="#" class="btn-more">SEE MORE</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="footer-logo">
+      <img src="/images/assets/footer-logo-56586a.png" alt="BeDecor Logo">
+    </div>
+    <div class="footer-copyright">
+      <p>© 2025 Betheme by <a href="#">Muffin group</a> | All Rights Reserved | Powered by <a href="#">WordPress</a></p>
+    </div>
+  </footer>
+
+</body>
+</html>

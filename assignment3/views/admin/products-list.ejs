@@ -1,0 +1,97 @@
+<div class="admin-page-header">
+  <h1 class="admin-page-title">Products Management</h1>
+  <div class="admin-page-actions">
+    <a href="/admin/products/add" class="btn-admin btn-admin-primary">
+      <i class="fas fa-plus"></i> Add New Product
+    </a>
+  </div>
+</div>
+
+<% if (products.length > 0) { %>
+  <div class="admin-table-container">
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Name</th>
+          <th>Category</th>
+          <th>Price</th>
+          <th>Color</th>
+          <th>Department</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% products.forEach(function(product) { %>
+          <tr>
+            <td>
+              <% if (product.image) { %>
+                <img src="<%= product.image %>" alt="<%= product.name %>" class="product-image-small" />
+              <% } else { %>
+                <div class="product-image-small" style="background: #f0f0f0; display: flex; align-items: center; justify-content: center;">
+                  <i class="fas fa-image" style="color: #999;"></i>
+                </div>
+              <% } %>
+            </td>
+            <td><strong><%= product.name %></strong></td>
+            <td><%= product.category || 'N/A' %></td>
+            <td>$<%= product.price.toFixed(2) %></td>
+            <td><%= product.color || 'N/A' %></td>
+            <td><%= product.department || 'N/A' %></td>
+            <td>
+              <div class="action-buttons">
+                <a href="/admin/products/edit/<%= product._id %>" class="btn-admin btn-admin-primary btn-admin-sm">
+                  <i class="fas fa-edit"></i> Edit
+                </a>
+                <form action="/admin/products/delete/<%= product._id %>" method="POST" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete this product?');">
+                  <button type="submit" class="btn-admin btn-admin-danger btn-admin-sm">
+                    <i class="fas fa-trash"></i> Delete
+                  </button>
+                </form>
+              </div>
+            </td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination -->
+  <% if (totalPages > 1) { %>
+    <div style="margin-top: 30px; display: flex; justify-content: center; align-items: center; gap: 10px;">
+      <% if (currentPage > 1) { %>
+        <a href="/admin/products?page=<%= currentPage - 1 %>" class="btn-admin btn-admin-secondary">
+          <i class="fas fa-chevron-left"></i> Previous
+        </a>
+      <% } else { %>
+        <span class="btn-admin btn-admin-secondary" style="opacity: 0.5; cursor: not-allowed;">
+          <i class="fas fa-chevron-left"></i> Previous
+        </span>
+      <% } %>
+
+      <span style="padding: 10px 20px; background: #f8f9fa; border-radius: 6px;">
+        Page <%= currentPage %> of <%= totalPages %> (<%= totalProducts %> products)
+      </span>
+
+      <% if (currentPage < totalPages) { %>
+        <a href="/admin/products?page=<%= currentPage + 1 %>" class="btn-admin btn-admin-secondary">
+          Next <i class="fas fa-chevron-right"></i>
+        </a>
+      <% } else { %>
+        <span class="btn-admin btn-admin-secondary" style="opacity: 0.5; cursor: not-allowed;">
+          Next <i class="fas fa-chevron-right"></i>
+        </span>
+      <% } %>
+    </div>
+  <% } %>
+<% } else { %>
+  <div class="empty-state">
+    <i class="fas fa-box-open"></i>
+    <h3>No products found</h3>
+    <p>Get started by adding your first product</p>
+    <a href="/admin/products/add" class="btn-admin btn-admin-primary">
+      <i class="fas fa-plus"></i> Add Product
+    </a>
+  </div>
+<% } %>
+

@@ -1,0 +1,93 @@
+<div class="admin-page-header">
+  <h1 class="admin-page-title">Dashboard</h1>
+</div>
+
+<div class="stats-grid">
+  <div class="stat-card primary">
+    <div class="stat-card-header">
+      <span class="stat-card-title">Total Products</span>
+      <i class="fas fa-box stat-card-icon"></i>
+    </div>
+    <div class="stat-card-value"><%= totalProducts %></div>
+  </div>
+
+  <div class="stat-card success">
+    <div class="stat-card-header">
+      <span class="stat-card-title">Categories</span>
+      <i class="fas fa-tags stat-card-icon"></i>
+    </div>
+    <div class="stat-card-value"><%= totalCategories %></div>
+  </div>
+
+  <div class="stat-card warning">
+    <div class="stat-card-header">
+      <span class="stat-card-title">Recent Products</span>
+      <i class="fas fa-clock stat-card-icon"></i>
+    </div>
+    <div class="stat-card-value"><%= recentProducts.length %></div>
+  </div>
+</div>
+
+<div class="recent-products-section">
+  <h2 style="margin-bottom: 20px; font-size: 22px; color: #333;">Recent Products</h2>
+  
+  <% if (recentProducts.length > 0) { %>
+    <div class="admin-table-container">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% recentProducts.forEach(function(product) { %>
+            <tr>
+              <td>
+                <% if (product.image) { %>
+                  <img src="<%= product.image %>" alt="<%= product.name %>" class="product-image-small" />
+                <% } else { %>
+                  <div class="product-image-small" style="background: #f0f0f0; display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-image" style="color: #999;"></i>
+                  </div>
+                <% } %>
+              </td>
+              <td><%= product.name %></td>
+              <td><%= product.category || 'N/A' %></td>
+              <td>$<%= product.price.toFixed(2) %></td>
+              <td>
+                <div class="action-buttons">
+                  <a href="/admin/products/edit/<%= product._id %>" class="btn-admin btn-admin-primary btn-admin-sm">
+                    <i class="fas fa-edit"></i> Edit
+                  </a>
+                </div>
+              </td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+  <% } else { %>
+    <div class="empty-state">
+      <i class="fas fa-box-open"></i>
+      <h3>No products yet</h3>
+      <p>Get started by adding your first product</p>
+      <a href="/admin/products/add" class="btn-admin btn-admin-primary">
+        <i class="fas fa-plus"></i> Add Product
+      </a>
+    </div>
+  <% } %>
+</div>
+
+<div style="margin-top: 30px;">
+  <a href="/admin/products" class="btn-admin btn-admin-secondary">
+    <i class="fas fa-list"></i> View All Products
+  </a>
+  <a href="/admin/products/add" class="btn-admin btn-admin-primary">
+    <i class="fas fa-plus"></i> Add New Product
+  </a>
+</div>
+
