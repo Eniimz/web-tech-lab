@@ -1,74 +1,51 @@
-# A Full Stack App developed using MERN
+# Assignment
 
-This repo hosts a Express App in main folder and a React App in admin folder
+**Student:** Azaz Ahsan  
+**Registration No:** SP23-BCS-35
 
-## Run Locally
+## Overview
 
-### Server
+A full-stack web application built with Node.js, Express.js, MongoDB, and EJS templating for server-side rendering.
 
-from main folder run
+## What's Implemented
 
-> npm install
+### Frontend Features
+- Responsive homepage with hero slider, icon boxes, and parallax sections
+- Product listing page with pagination and category filtering
+- Shopping cart functionality
+- Checkout page with Bootstrap 5 form validation
+- Single-page CRUD application using jQuery and JSONPlaceholder API
 
-> npm run dev
+### Backend Features
+- User authentication (login/register) with session management
+- Product management with MongoDB integration
+- Shopping cart using cookies
+- Admin panel with separate layout for product CRUD operations
 
-Application will start at localhost:4000
-you should have installed nodmeon once using below commad
+### Admin Panel
+- Dashboard with statistics
+- Product list with pagination
+- Add/Edit/Delete products functionality
+- Role-based access control (admin users only)
 
-> npm i nodemon -g
+### Technologies Used
+- **Backend:** Node.js, Express.js, MongoDB, Mongoose
+- **Frontend:** EJS Templates, Bootstrap 5, jQuery
+- **Database:** MongoDB
+- **Styling:** Custom CSS, Bootstrap 5
 
-### Client
+## Setup Instructions
 
-admin folder resides inside same root folder go to admin folder and execute following commands
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-> npm i
+2. Configure MongoDB connection in `config/development.json`
 
-> npm start
+3. Start the server:
+   ```bash
+   npm run dev
+   ```
 
-react app will start at localhost:3000/admin
-
-## Deploy
-
-This application is heroku ready you must declare three environment variables namely
-
-jwtPrivateKey
-
-db
-
-sessionSecret
-
-db will contain the connection string of your mongo db
-ideally you should create a project at http://mongodb.com and get a connection string from there.
-
-just copy the code in your own repo and link your heroku with this code.
-
-## Data integrity
-
-A Cron job runs at the server to refresh the data every 30 minutes.
-comment out
-
-> const { startCronJobs } = require("./croneJobs/index");
-
-to avoid data refresh
-
-## default user
-
-name:"usman",
-email:"admin@admin.com"
-password:"admin"
-roles:["admin","customer"]
-
-every user who has admin in its roles array will be able to modify the data.
-
-## caution
-
-locally react app will not be served from express. In order to do that you need to run following command from admin folder
-
-> npm run build
-
-## info
-
-Live version is hosted at https://fullstack-usman.herokuapp.com/
-
-
-//use your project (website given) in a project like this
+4. Access the application at `http://localhost:4000`
