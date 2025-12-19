@@ -1,0 +1,48 @@
+<div class="products-section">
+  <div class="products-container">
+    <h2 class="section-title">SHOPPING CART</h2>
+    
+    <% if(products.length > 0) { %>
+      <div style="overflow-x: auto;">
+        <table style="width: 100%; border-collapse: collapse; background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden;">
+          <thead style="background-color: #000; color: white;">
+        <tr>
+              <th style="padding: 15px; text-align: left; letter-spacing: 1px;">PRODUCT NAME</th>
+              <th style="padding: 15px; text-align: right; letter-spacing: 1px;">PRICE</th>
+        </tr>
+    </thead>
+    <tbody>
+            <% for(var i=0; i<products.length; i++) { let product = products[i]; %>
+              <tr style="border-bottom: 1px solid #ddd;">
+                <td style="padding: 15px;"><%=product.name %></td>
+                <td style="padding: 15px; text-align: right; font-weight: 600;">$<%= typeof product.price === 'number' ? product.price.toFixed(2) : Number(product.price).toFixed(2) %></td>
+            </tr>
+            <% } %> 
+          </tbody>
+          <tfoot style="background-color: #f9f9f9; font-weight: 700;">
+                <tr>
+              <td style="padding: 20px; letter-spacing: 1px;">TOTAL:</td>
+              <td style="padding: 20px; text-align: right; font-size: 1.3rem;">$<%= total.toFixed(2) %></td>
+                </tr>
+            </tfoot>
+</table>
+      </div>
+      
+      <div style="margin-top: 30px; text-align: center; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+        <a href="/" style="display: inline-block; padding: 12px 30px; background-color: #fff; color: #000; text-decoration: none; font-weight: 600; letter-spacing: 1px; border-radius: 4px; border: 2px solid #000; transition: all 0.3s ease;">
+          CONTINUE SHOPPING
+        </a>
+        <a href="/checkout" style="display: inline-block; padding: 12px 30px; background-color: #000; color: #fff; text-decoration: none; font-weight: 600; letter-spacing: 1px; border-radius: 4px; transition: background-color 0.3s ease;">
+          PROCEED TO CHECKOUT
+        </a>
+      </div>
+    <% } else { %>
+      <div style="text-align: center; padding: 60px 20px; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        <p style="font-size: 1.2rem; color: #666; margin-bottom: 30px;">Your cart is empty</p>
+        <a href="/" style="display: inline-block; padding: 12px 30px; background-color: #000; color: #fff; text-decoration: none; font-weight: 600; letter-spacing: 1px; border-radius: 4px;">
+          START SHOPPING
+        </a>
+      </div>
+    <% } %>
+  </div>
+</div>

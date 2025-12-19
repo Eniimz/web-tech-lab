@@ -1,0 +1,14 @@
+<nav class="navbar">
+  <div class="logo"><span>be</span>DECOR</div>
+  <ul class="nav-links">
+    <li><a href="/" class="active">HOME</a></li>
+    <li><a href="/">PRODUCTS</a></li>
+    <li><a href="/cart">CART</a></li>
+    <% if(!user) { %>
+      <li><a href="/login">LOGIN</a></li>
+      <li><a href="/register">REGISTER</a></li>
+    <% } else { %>
+      <li><a href="/logout">LOGOUT</a></li>
+        <% } %>
+      </ul>
+</nav>

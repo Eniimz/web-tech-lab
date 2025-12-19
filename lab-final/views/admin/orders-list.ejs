@@ -1,0 +1,140 @@
+<div class="admin-page-header">
+  <h1 class="admin-page-title">Orders Management</h1>
+</div>
+
+<% if (orders.length > 0) { %>
+  <div class="admin-table-container">
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Customer Name</th>
+          <th>Email</th>
+          <th>Total Amount</th>
+          <th>Status</th>
+          <th>Order Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% orders.forEach(function(order) { %>
+          <tr>
+            <td>
+              <code style="font-size: 0.85rem;"><%= order._id.toString().substring(0, 8) %>...</code>
+            </td>
+            <td><strong><%= order.customerName %></strong></td>
+            <td><%= order.email %></td>
+            <td>$<%= order.totalAmount.toFixed(2) %></td>
+            <td>
+              <% 
+                let statusClass = '';
+                if (order.status === 'Confirmed') statusClass = 'status-confirmed';
+                else if (order.status === 'Cancelled') statusClass = 'status-cancelled';
+                else statusClass = 'status-pending';
+              %>
+              <span class="status-badge <%= statusClass %>">
+                <%= order.status %>
+              </span>
+            </td>
+            <td><%= new Date(order.createdAt).toLocaleString() %></td>
+            <td>
+              <div class="action-buttons">
+                <% if (order.status === 'Pending') { %>
+                  <form action="/admin/orders/confirm/<%= order._id %>" method="POST" style="display: inline;" onsubmit="return confirm('Mark this order as Confirmed?');">
+                    <button type="submit" class="btn-admin btn-admin-success btn-admin-sm">
+                      <i class="fas fa-check"></i> Confirm
+                    </button>
+                  </form>
+                  <form action="/admin/orders/cancel/<%= order._id %>" method="POST" style="display: inline; margin-left: 5px;" onsubmit="return confirm('Are you sure you want to cancel this order?');">
+                    <button type="submit" class="btn-admin btn-admin-danger btn-admin-sm">
+                      <i class="fas fa-times"></i> Cancel
+                    </button>
+                  </form>
+                <% } else if (order.status === 'Confirmed') { %>
+                  <form action="/admin/orders/cancel/<%= order._id %>" method="POST" style="display: inline;" onsubmit="return confirm('Are you sure you want to cancel this confirmed order?');">
+                    <button type="submit" class="btn-admin btn-admin-danger btn-admin-sm">
+                      <i class="fas fa-times"></i> Cancel
+                    </button>
+                  </form>
+                <% } else { %>
+                  <span class="text-muted">No actions available</span>
+                <% } %>
+              </div>
+            </td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination -->
+  <% if (totalPages > 1) { %>
+    <div class="pagination-container">
+      <div class="pagination-info">
+        Showing page <%= currentPage %> of <%= totalPages %> (Total: <%= totalOrders %> orders)
+      </div>
+      <div class="pagination">
+        <% if (currentPage > 1) { %>
+          <a href="/admin/orders?page=<%= currentPage - 1 %>" class="btn-admin btn-admin-secondary">
+            <i class="fas fa-chevron-left"></i> Previous
+          </a>
+        <% } %>
+        
+        <% for (let i = 1; i <= totalPages; i++) { %>
+          <% if (i === currentPage) { %>
+            <span class="pagination-current"><%= i %></span>
+          <% } else if (i === 1 || i === totalPages || (i >= currentPage - 2 && i <= currentPage + 2)) { %>
+            <a href="/admin/orders?page=<%= i %>" class="pagination-link"><%= i %></a>
+          <% } else if (i === currentPage - 3 || i === currentPage + 3) { %>
+            <span class="pagination-ellipsis">...</span>
+          <% } %>
+        <% } %>
+        
+        <% if (currentPage < totalPages) { %>
+          <a href="/admin/orders?page=<%= currentPage + 1 %>" class="btn-admin btn-admin-secondary">
+            Next <i class="fas fa-chevron-right"></i>
+          </a>
+        <% } %>
+      </div>
+    </div>
+  <% } %>
+<% } else { %>
+  <div class="admin-empty-state">
+    <i class="fas fa-shopping-cart" style="font-size: 3rem; color: #ccc; margin-bottom: 1rem;"></i>
+    <p>No orders found.</p>
+  </div>
+<% } %>
+
+<style>
+  .status-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+  .status-pending {
+    background: #ffc107;
+    color: #000;
+  }
+  .status-confirmed {
+    background: #198754;
+    color: white;
+  }
+  .status-cancelled {
+    background: #dc3545;
+    color: white;
+  }
+  .action-buttons {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  code {
+    background: #f8f9fa;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-family: 'Courier New', monospace;
+  }
+</style>
+
